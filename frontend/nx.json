@@ -1,0 +1,27 @@
+{
+  "npmScope": "fitness-app",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "fitness-app-e2e": {
+      "tags": []
+    },
+    "fitness-app": {
+      "tags": []
+    },
+    "api": {
+      "tags": []
+    },
+    "exercise-data": {
+      "tags": []
+    },
+    "shared-models": {
+      "tags": []
+    }
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "projects": {
+    "fitness-app": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/fitness-app",
+      "sourceRoot": "apps/fitness-app/src",
+      "prefix": "fitness-app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/fitness-app",
+            "index": "apps/fitness-app/src/index.html",
+            "main": "apps/fitness-app/src/main.ts",
+            "polyfills": "apps/fitness-app/src/polyfills.ts",
+            "tsConfig": "apps/fitness-app/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/fitness-app/src/favicon.ico",
+              "apps/fitness-app/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "apps/fitness-app/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/fitness-app/src/environments/environment.ts",
+                  "with": "apps/fitness-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fitness-app:build",
+            "proxyConfig": "apps/fitness-app/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fitness-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fitness-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/fitness-app/tsconfig.app.json",
+              "apps/fitness-app/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/fitness-app/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/fitness-app/jest.config.js",
+            "tsConfig": "apps/fitness-app/tsconfig.spec.json",
+            "setupFile": "apps/fitness-app/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "fitness-app-e2e": {
+      "root": "apps/fitness-app-e2e",
+      "sourceRoot": "apps/fitness-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/fitness-app-e2e/cypress.json",
+            "tsConfig": "apps/fitness-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "fitness-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "fitness-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/fitness-app-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/fitness-app-e2e/**"]
+          }
+        }
+      }
+    },
+    "api": {
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "projectType": "application",
+      "prefix": "api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/api",
+            "main": "apps/api/src/main.ts",
+            "tsConfig": "apps/api/tsconfig.app.json",
+            "assets": ["apps/api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api/tsconfig.app.json",
+              "apps/api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/api/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "tsConfig": "apps/api/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "exercise-data": {
+      "root": "libs/exercise/data",
+      "sourceRoot": "libs/exercise/data/src",
+      "prefix": "fitness-app",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/exercise/data/.eslintrc",
+            "tsConfig": [
+              "libs/exercise/data/tsconfig.lib.json",
+              "libs/exercise/data/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/exercise/data/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/exercise/data/jest.config.js",
+            "tsConfig": "libs/exercise/data/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "shared-models": {
+      "projectType": "library",
+      "root": "libs/shared/models",
+      "sourceRoot": "libs/shared/models/src",
+      "prefix": "fitness-app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/exercise/data/.eslintrc",
+            "tsConfig": [
+              "libs/shared/models/tsconfig.lib.json",
+              "libs/shared/models/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/models/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/models/jest.config.js",
+            "tsConfig": "libs/shared/models/tsconfig.spec.json",
+            "setupFile": "libs/shared/models/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "fitness-app"
+}

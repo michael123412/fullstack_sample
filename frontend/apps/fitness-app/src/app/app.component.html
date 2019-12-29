@@ -1,0 +1,23 @@
+<div class="content" fxLayout="column">
+  <header fxFlex class="header" fxLayout="column" fxLayoutAlign="start start">
+    <button fxFlex mat-button (click)="sidenav.open()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
+    </button>
+  </header>
+  <mat-sidenav-container fxFill class="example-container" (backdropClick)="close()">
+    <mat-sidenav
+      class="sidenav"
+      #sidenav
+      (keydown.escape)="close()"
+      disableClose
+    >
+      <p><button mat-button (click)="close()">Create Workout</button></p>
+      <p><button mat-button (click)="close()">Create Training Plan</button></p>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="main">
+      <router-outlet></router-outlet>
+      <div>Message: {{ hello$ | async | json }}</div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
