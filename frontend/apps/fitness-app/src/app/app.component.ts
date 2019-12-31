@@ -13,7 +13,7 @@ export interface Message {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>(environment.backendURL + '/api/HelloWorld');
+  hello$ = this.http.get<Message>(environment.backendURL + '/HelloWorld');
   constructor(private http: HttpClient) {
   }
 

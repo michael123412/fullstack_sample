@@ -242,6 +242,40 @@
           "styleext": "scss"
         }
       }
+    },
+    "exercise-list": {
+      "projectType": "library",
+      "root": "libs/exercise/feature/feature-exercise-list",
+      "sourceRoot": "libs/exercise/feature/feature-exercise-list/src",
+      "prefix": "fitness-app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/exercise/feature/feature-exercise-list/tsconfig.lib.json",
+              "libs/exercise/feature/feature-exercise-list/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/exercise/feature/feature-exercise-list/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/exercise/feature/feature-exercise-list/jest.config.js",
+            "tsConfig": "libs/exercise/feature/feature-exercise-list/tsconfig.spec.json",
+            "setupFile": "libs/exercise/feature/feature-exercise-list/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -17,7 +17,10 @@
     "baseUrl": ".",
     "paths": {
       "@fitness-app/exercise/data": ["libs/exercise/data/src/index.ts"],
-      "@fitness-app/shared/models": ["libs/shared/models/src/index.ts"]
+      "@fitness-app/shared/models": ["libs/shared/models/src/index.ts"],
+      "@fitness-app/exercise/feature/feature-exercise-list": [
+        "libs/exercise/feature/feature-exercise-list/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

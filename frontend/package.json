@@ -69,7 +69,11 @@
     "typeorm": "^0.2.20",
     "typescript": "~3.4.5",
     "webpack-bundle-analyzer": "^3.5.2",
-    "zone.js": "^0.9.1"
+    "zone.js": "^0.9.1",
+    "@ngrx/store": "8.3.0",
+    "@ngrx/effects": "8.3.0",
+    "@ngrx/entity": "8.3.0",
+    "@ngrx/router-store": "8.3.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.3",
@@ -100,7 +104,9 @@
     "@nrwl/eslint-plugin-nx": "8.6.0",
     "@typescript-eslint/parser": "2.0.0-alpha.4",
     "@typescript-eslint/eslint-plugin": "2.0.0-alpha.4",
-    "eslint-config-prettier": "6.0.0"
+    "eslint-config-prettier": "6.0.0",
+    "@ngrx/schematics": "8.3.0",
+    "@ngrx/store-devtools": "8.3.0"
   },
   "engines": {
     "node": "10",

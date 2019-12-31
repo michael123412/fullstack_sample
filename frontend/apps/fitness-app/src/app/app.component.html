@@ -17,6 +17,7 @@
 
     <mat-sidenav-content class="main">
       <router-outlet></router-outlet>
+      <fitness-app-exercise-list></fitness-app-exercise-list>
       <div>Message: {{ hello$ | async | json }}</div>
     </mat-sidenav-content>
   </mat-sidenav-container>

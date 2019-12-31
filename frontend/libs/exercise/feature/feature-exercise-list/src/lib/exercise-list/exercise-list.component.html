@@ -1,0 +1,6 @@
+<p>exercise-list works!</p>
+<h1>All Exercises:</h1>
+<div *ngFor="let exercise of exercises$ |async">
+    {{exercise.name}}
+    {{exercise.description}}
+</div>
