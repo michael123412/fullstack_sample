@@ -1,0 +1,20 @@
+.container {
+    max-width: 900px;
+    width: calc(100% - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+    background: #3e2daf;
+    margin: 50px;
+    padding: 20px;
+}
+
+.radio-group {
+    margin-top: 10px;
+    .radio-group-button {
+        margin: 10px;
+    }
+}
+
+.confirm-button {
+    background: #1e8945;        
+}

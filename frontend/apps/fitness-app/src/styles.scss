@@ -1,4 +1,107 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+$white: (
+    50 : #e8e6f5,
+);
+
+$mat-myapp-primary: (
+    50 : #e8e6f5,
+    100 : #c5c0e7,
+    200 : #9f96d7,
+    300 : #786cc7,
+    400 : #5b4dbb,
+    500 : #3e2daf,
+    600 : #3828a8,
+    700 : #30229f,
+    800 : #281c96,
+    900 : #1b1186,
+    A100 : #bdb8ff,
+    A200 : #8e85ff,
+    A400 : #5f52ff,
+    A700 : #4739ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$mat-myapp-accent: (
+    50 : #eef5fa,
+    100 : #d4e5f3,
+    200 : #b7d4eb,
+    300 : #9ac2e2,
+    400 : #84b5dc,
+    500 : #6ea8d6,
+    600 : #66a0d1,
+    700 : #5b97cc,
+    800 : #518dc6,
+    900 : #3f7dbc,
+    A100 : #ffffff,
+    A200 : #daebff,
+    A400 : #a7d1ff,
+    A700 : #8dc3ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+@function my-mat-light-theme-foreground($color) {
+    @return (
+        base:              $color,
+        divider:           $color,
+        dividers:          $color,
+        disabled:          rgba($color, 0.38),
+        disabled-button:   rgba($color, 0.38),
+        disabled-text:     rgba($color, 0.38),
+        hint-text:         rgba($color, 0.38),
+        secondary-text:    rgba($color, 0.54),
+        icon:              rgba($color, 0.54),
+        icons:             rgba($color, 0.54),
+        text:              rgba($color, 0.87),
+        slider-off:        rgba($color, 0.26),
+        slider-off-active: rgba($color, 0.38),
+    );
+};
+
+
+$primary: mat-palette($mat-myapp-primary);
+$accent: mat-palette($mat-myapp-accent);
+$theme: mat-light-theme($primary, $accent);
+
+// You can put any color here. I've chosen mat-color($my-app-primary, 700)
+$my-foreground: my-mat-light-theme-foreground(mat-color($white, 50));
+$theme-custom: map-merge($theme, (foreground: $my-foreground));
+
+
+@include angular-material-theme($theme-custom);
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

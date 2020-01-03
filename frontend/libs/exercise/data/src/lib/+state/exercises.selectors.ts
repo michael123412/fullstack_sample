@@ -38,9 +38,6 @@ const getSelectedExercises = createSelector(
   (exercises, id) => {
     const result: Exercise = exercises[id]; // exercises.find((exercise: Exercise) => exercise.id === id);    
     // const result = exercises.values.find(it => it['id'] === id);
-    console.log(exercises);
-    console.log(result);
-
     return result ? Object.assign({}, result) : undefined;
   }
 );

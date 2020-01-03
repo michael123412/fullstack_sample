@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ExercisesFacade, Exercise } from '@fitness-app/exercise/data';
 import { Observable } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'fitness-app-exercise-edit',
@@ -11,13 +12,20 @@ import { Observable } from 'rxjs';
 export class ExerciseEditComponent implements OnInit {
   selectedExercise$: Observable<Exercise> ;
 
-  constructor(private exercisesFacade: ExercisesFacade) { }
+  constructor(private exercisesFacade: ExercisesFacade,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.selectedExercise$ = this.exercisesFacade.selectedExercises$;
-    this.selectedExercise$.subscribe((exercise: Exercise) => {
-      console.log(exercise);
-    });
   }
 
+  handleCancelClicked(): void {
+    this.router.navigate(['exercises']);
+  }
+
+  handleConfirmClicked(exercise: Exercise): void {
+    this.exercisesFacade.update(exercise);
+    this.router.navigate(['exercises']);
+  }
 }

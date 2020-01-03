@@ -1,1 +1,4 @@
-<fitness-app-exercise-configuration [exercise]="selectedExercise$ | async"></fitness-app-exercise-configuration>
+<fitness-app-exercise-configuration 
+[exercise]="selectedExercise$ | async" 
+(cancelClicked)="handleCancelClicked($event)"
+(confirmClicked)="handleConfirmClicked($event)"></fitness-app-exercise-configuration>
