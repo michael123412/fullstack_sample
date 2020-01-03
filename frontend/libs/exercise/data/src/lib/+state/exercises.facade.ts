@@ -8,7 +8,9 @@ import {
   LoadExercises,
   CreateExercise,
   DeleteExercise,
-  UpdateExercise
+  UpdateExercise,
+  ExerciseSelected,
+  LoadExercise
 } from './exercises.actions';
 import { Exercise } from '../models/exercise';
 import { Observable } from 'rxjs';
@@ -16,8 +18,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ExercisesFacade {
   loaded$ = this.store.pipe(select(exercisesQuery.getLoaded));
-  allExercises$: Observable<Array<Exercise>> = this.store.pipe(select(exercisesQuery.getAll));
-  selectedExercises$ = this.store.pipe(
+  allExercises$: Observable<Exercise[]> = this.store.pipe(select(exercisesQuery.getAll));
+  selectedExercises$: Observable<Exercise>  = this.store.pipe(
     select(exercisesQuery.getSelectedExercises)
   );
 
@@ -25,6 +27,10 @@ export class ExercisesFacade {
 
   loadAll() {
     this.store.dispatch(new LoadExercises());
+  }
+
+  loadSingle(id: string) {
+    this.store.dispatch(new LoadExercise(id));
   }
 
   create(exercise: Exercise) {
@@ -39,5 +45,9 @@ export class ExercisesFacade {
     this.store.dispatch(
       new UpdateExercise({ id: exercise.id, changes: exercise })
     );
+  }
+
+  select(id: string) {
+    this.store.dispatch(new ExerciseSelected(id));
   }
 }

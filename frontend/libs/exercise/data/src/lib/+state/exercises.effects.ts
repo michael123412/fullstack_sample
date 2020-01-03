@@ -14,7 +14,9 @@ import {
   ExerciseUpdated,
   UpdateExercise,
   DeleteExercise,
-  ExerciseDeleted
+  ExerciseDeleted,
+  LoadExercise,
+  ExerciseLoaded
 } from './exercises.actions';
 import { ExerciseDataService } from '../service/exercise-data.service';
 import { Exercise } from '../models/exercise';
@@ -33,6 +35,23 @@ export class ExercisesEffects {
       },
 
       onError: (action: LoadExercises, error) => {
+        console.error('Error', error);
+        return new ExercisesLoadError(error);
+      }
+    }
+  );
+
+  @Effect() loadExercise$ = this.dataPersistence.fetch(
+    ExercisesActionTypes.LoadExercise,
+    {
+      run: (action: LoadExercise, state: ExercisesPartialState) => {
+        return this.exerciseDataService.getForId(action.payload).pipe(
+          map(
+            (exercise: Exercise) => new ExerciseLoaded(exercise),
+          ));
+      },
+
+      onError: (action: LoadExercise, error) => {
         console.error('Error', error);
         return new ExercisesLoadError(error);
       }

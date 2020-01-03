@@ -20,6 +20,15 @@
       "@fitness-app/shared/models": ["libs/shared/models/src/index.ts"],
       "@fitness-app/exercise/feature/feature-exercise-list": [
         "libs/exercise/feature/feature-exercise-list/src/index.ts"
+      ],
+      "@fitness-app/exercise/feature/feature-exercise-edit": [
+        "libs/exercise/feature/feature-exercise-edit/src/index.ts"
+      ],
+      "@fitness-app/shared/ui/confirm-dialog": [
+        "libs/shared/ui/confirm-dialog/src/index.ts"
+      ],
+      "@fitness-app/exercise/ui/exercise-configuration": [
+        "libs/exercise/ui/exercise-configuration/src/index.ts"
       ]
     }
   },

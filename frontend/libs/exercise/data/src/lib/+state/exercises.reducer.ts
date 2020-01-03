@@ -59,6 +59,13 @@ export function reducer(
     case ExercisesActionTypes.ExerciseDeleted: {
       return adapter.removeOne(action.payload.id, state);
     }
+    case ExercisesActionTypes.ExerciseLoaded: {
+      return adapter.addOne(action.payload, {
+        ...state,
+        // set loaded for getAll Selector. 
+        loaded: true
+      });
+    }
   }
   return state;
 }

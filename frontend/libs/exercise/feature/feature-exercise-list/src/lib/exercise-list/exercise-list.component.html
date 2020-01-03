@@ -1,6 +1,85 @@
-<p>exercise-list works!</p>
-<h1>All Exercises:</h1>
-<div *ngFor="let exercise of exercises$ |async">
-    {{exercise.name}}
-    {{exercise.description}}
+<ng-container *ngIf="!(loaded$ | async)">
+  <div fxLayout="row" fxLayoutAlign="center center" class="loading-screen">
+    <span fxFlex="none" class="loading-screen-title">
+      Loading Exercises ....</span
+    >
+  </div>
+</ng-container>
+<div fxLayout="column" fxLayoutAlign="center center" *ngIf="loaded$ | async">
+  <h1 fxFlex="none">Exercises</h1>
+  <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="container">
+    <mat-table [dataSource]="exercises$ | async">
+      <ng-container matColumnDef="name">
+        <mat-header-cell fxFlex="25" fxFlex.xs *matHeaderCellDef
+          >Name
+        </mat-header-cell>
+        <mat-cell fxFlex="25" fxFlex.xs *matCellDef="let element">{{
+          element.name
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell
+          fxFlex="30"
+          fxFlex.gt-xs
+          fxHide
+          fxShow.gt-xs
+          *matHeaderCellDef
+          >Description</mat-header-cell
+        >
+        <mat-cell
+          fxFlex="30"
+          fxFlex.gt-xs
+          fxHide
+          fxShow.gt-xs
+          *matCellDef="let element"
+          >{{ element.description }}</mat-cell
+        >
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <mat-header-cell fxFlex fxHide fxShow.gt-sm *matHeaderCellDef>
+          Type
+        </mat-header-cell>
+        <mat-cell fxFlex fxHide fxShow.gt-sm *matCellDef="let element">
+          {{ ExerciseType[element.type] }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="edit">
+        <mat-header-cell
+          fxFlex="7"
+          fxFlex.xs="none"
+          *matHeaderCellDef
+        ></mat-header-cell>
+        <mat-cell fxFlex="7" fxFlex.xs="none" *matCellDef="let element">
+          <button mat-icon-button (click)="editClicked(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <mat-header-cell
+          fxFlex="7"
+          fxFlex.xs="none"
+          *matHeaderCellDef
+        ></mat-header-cell>
+        <mat-cell fxFlex="7" fxFlex.xs="none" *matCellDef="let element">
+          <button mat-icon-button (click)="deleteClicked(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+      ></mat-header-row>
+      <mat-row
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+      ></mat-row>
+    </mat-table>
+    <div fxFill fxLayout="row" class="footer">
+      <button fxFlex="none" mat-raised-button class="add-button" (click)="addExercise()">
+        Create new Exercise
+      </button>
+    </div>
+  </div>
 </div>

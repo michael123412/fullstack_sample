@@ -1,24 +1,35 @@
 <div class="content" fxLayout="column">
-  <header fxFlex class="header" fxLayout="column" fxLayoutAlign="start start">
-    <button fxFlex mat-button (click)="sidenav.open()">
-      <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
+  <header fxFlex class="header" fxLayout="row" fxLayoutAlign="start center">
+    <button fxFlex="none" mat-button (click)="sidenav.open()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon"
+        >menu</mat-icon
+      >
     </button>
+    <div fxFlex></div>
+    <div fxFlex="none" class="user-field">{{ hello$ | async | json }}</div>
   </header>
-  <mat-sidenav-container fxFill class="example-container" (backdropClick)="close()">
+  <mat-sidenav-container
+    fxFill
+    class="example-container"
+    (backdropClick)="close()"
+  >
     <mat-sidenav
       class="sidenav"
       #sidenav
       (keydown.escape)="close()"
       disableClose
     >
-      <p><button mat-button (click)="close()">Create Workout</button></p>
-      <p><button mat-button (click)="close()">Create Training Plan</button></p>
+    <div fxLayout="column"
+    fxLayoutAlign="start center">
+      <button fxFlex class="sidenav-button underline" mat-button (click)="close()" routerLink='/'>Start Page</button>
+      <button fxFlex mat-button class="sidenav-button" (click)="close()" routerLink='/exercises'>Exercises</button>
+      <button fxFlex mat-button class="sidenav-button" (click)="close()">Workouts</button>
+      <button fxFlex class="sidenav-button underline" mat-button (click)="close()">Training Plans</button>
+    </div>
     </mat-sidenav>
 
     <mat-sidenav-content class="main">
       <router-outlet></router-outlet>
-      <fitness-app-exercise-list></fitness-app-exercise-list>
-      <div>Message: {{ hello$ | async | json }}</div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

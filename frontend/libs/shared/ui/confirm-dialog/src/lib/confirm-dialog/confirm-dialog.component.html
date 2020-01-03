@@ -1,0 +1,14 @@
+<div class="container">
+  <h1 mat-dialog-title>{{ data.title }}</h1>
+  <div mat-dialog-content>
+    <p>{{ data.description }}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="close(false)">
+      {{ data.declineText }}
+    </button>
+    <button mat-raised-button class="delete-button" (click)="close(true)" cdkFocusInitial>
+      {{ data.confirmText }}
+    </button>
+  </div>
+</div>

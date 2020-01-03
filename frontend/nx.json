@@ -25,6 +25,15 @@
     },
     "exercise-list": {
       "tags": []
+    },
+    "exercise-edit": {
+      "tags": []
+    },
+    "shared-ui-confirm-dialog": {
+      "tags": []
+    },
+    "exercise-ui-exercise-configuration": {
+      "tags": []
     }
   }
 }

@@ -37,8 +37,10 @@ namespace fitnessApi
                 builder =>
                 {
                     builder.WithOrigins("http://localhost:4200",
-                                        "https://www.nameofdeployedapp.com");
-                });
+                                        "https://www.nameofdeployedapp.com")
+                    .WithMethods("GET", "POST", "DELETE", "PUT")
+                    .WithHeaders("*");
+            });
             });
 
             services.AddMvc(options =>

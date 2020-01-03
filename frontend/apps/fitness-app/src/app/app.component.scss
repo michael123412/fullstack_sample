@@ -21,6 +21,12 @@
 .header {
   background-color: rgb(62, 45, 175);
   height: 50px;
+  min-height: 50px;
+}
+
+.user-field {
+  color: white;
+  margin: 0 30px;
 }
 
 .mat-icon {
@@ -29,4 +35,23 @@
   font-size: 30px;
   height: 30px;
   width: 30px;
+}
+
+.underline {
+  border-bottom: 2px solid white;
+  border-radius: 0;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.sidenav-button {
+  font-size: 1.1rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+mat-sidenav-container {
+  button {
+    width: 100%;
+  }
 }

@@ -10,7 +10,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ExerciseListModule } from '@fitness-app/exercise/feature/feature-exercise-list';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ExerciseDataModule } from '@fitness-app/exercise/data';
@@ -27,9 +27,11 @@ import { environment } from '../environments/environment';
     RouterModule.forRoot(ROUTES),
     FlexLayoutModule,
     StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    }),
     EffectsModule.forRoot([]),
-    ExerciseDataModule.forRoot({ backendUrl: environment.backendURL }),
-    ExerciseListModule
+    ExerciseDataModule.forRoot({ backendUrl: environment.backendURL })    
   ],
   providers: [],
   bootstrap: [AppComponent]

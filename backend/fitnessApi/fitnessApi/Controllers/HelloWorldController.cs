@@ -15,7 +15,7 @@ namespace fitnessApi.Controllers
         [HttpGet]
         public ActionResult<string> Get()
         {
-            return "hello";
+            return "Hello. Your backend is working fine";
         }
     }
 }

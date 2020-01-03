@@ -276,6 +276,108 @@
           "styleext": "scss"
         }
       }
+    },
+    "exercise-edit": {
+      "projectType": "library",
+      "root": "libs/exercise/feature/feature-exercise-edit",
+      "sourceRoot": "libs/exercise/feature/feature-exercise-edit/src",
+      "prefix": "fitness-app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/exercise/feature/feature-exercise-edit/tsconfig.lib.json",
+              "libs/exercise/feature/feature-exercise-edit/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/exercise/feature/feature-exercise-edit/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/exercise/feature/feature-exercise-edit/jest.config.js",
+            "tsConfig": "libs/exercise/feature/feature-exercise-edit/tsconfig.spec.json",
+            "setupFile": "libs/exercise/feature/feature-exercise-edit/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-ui-confirm-dialog": {
+      "projectType": "library",
+      "root": "libs/shared/ui/confirm-dialog",
+      "sourceRoot": "libs/shared/ui/confirm-dialog/src",
+      "prefix": "fitness-app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/ui/confirm-dialog/tsconfig.lib.json",
+              "libs/shared/ui/confirm-dialog/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/ui/confirm-dialog/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/ui/confirm-dialog/jest.config.js",
+            "tsConfig": "libs/shared/ui/confirm-dialog/tsconfig.spec.json",
+            "setupFile": "libs/shared/ui/confirm-dialog/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "exercise-ui-exercise-configuration": {
+      "projectType": "library",
+      "root": "libs/exercise/ui/exercise-configuration",
+      "sourceRoot": "libs/exercise/ui/exercise-configuration/src",
+      "prefix": "fitness-app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/exercise/ui/exercise-configuration/tsconfig.lib.json",
+              "libs/exercise/ui/exercise-configuration/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/exercise/ui/exercise-configuration/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/exercise/ui/exercise-configuration/jest.config.js",
+            "tsConfig": "libs/exercise/ui/exercise-configuration/tsconfig.spec.json",
+            "setupFile": "libs/exercise/ui/exercise-configuration/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

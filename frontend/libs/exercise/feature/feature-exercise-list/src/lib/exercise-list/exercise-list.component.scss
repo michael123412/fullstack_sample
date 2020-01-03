@@ -1,0 +1,28 @@
+.loading-screen {
+    height: 100%;
+    width: 100%;    
+
+    .loading-screen-title {
+        font-size: 3rem;
+    }
+}
+
+.footer {
+    margin-top: 10px;
+    .add-button {
+        background: #1e8945;        
+    }
+}
+
+.container {
+    max-width: 900px;
+    width: calc(100% - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+mat-table {
+    width: 100%;
+    background: #3e2daf;
+
+}

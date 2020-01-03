@@ -13,11 +13,23 @@ export enum ExercisesActionTypes {
   UpdateExercise = '[Exercises] Update Exercise',
   ExerciseUpdated = '[Exercises] Exercise Updated',
   DeleteExercise = '[Exercises] Delete Exercise',
-  ExerciseDeleted = '[Exercises] Exercise Deleted'
+  ExerciseDeleted = '[Exercises] Exercise Deleted',
+  LoadExercise = '[Exercises] Load Exercise',
+  ExerciseLoaded = '[Exercises] Exercise Loaded'
 }
 
 export class LoadExercises implements Action {
   readonly type = ExercisesActionTypes.LoadExercises;
+}
+
+export class LoadExercise implements Action {
+  readonly type = ExercisesActionTypes.LoadExercise;
+  constructor(public payload: string) {}
+}
+
+export class ExerciseLoaded implements Action {
+  readonly type = ExercisesActionTypes.ExerciseLoaded;
+  constructor(public payload: Exercise) {}
 }
 
 export class ExercisesLoadError implements Action {
@@ -80,7 +92,9 @@ export type ExercisesAction =
   | UpdateExercise
   | ExerciseUpdated
   | DeleteExercise 
-  | ExerciseDeleted;
+  | ExerciseDeleted
+  | LoadExercise
+  | ExerciseLoaded;
 
 export const fromExercisesActions = {
   LoadExercises,
