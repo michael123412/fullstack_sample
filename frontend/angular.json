@@ -378,6 +378,108 @@
           "styleext": "scss"
         }
       }
+    },
+    "feature-exercise-add": {
+      "projectType": "library",
+      "root": "libs/exercise/feature/feature-exercise-add",
+      "sourceRoot": "libs/exercise/feature/feature-exercise-add/src",
+      "prefix": "fitness-app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/exercise/feature/feature-exercise-add/tsconfig.lib.json",
+              "libs/exercise/feature/feature-exercise-add/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/exercise/feature/feature-exercise-add/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/exercise/feature/feature-exercise-add/jest.config.js",
+            "tsConfig": "libs/exercise/feature/feature-exercise-add/tsconfig.spec.json",
+            "setupFile": "libs/exercise/feature/feature-exercise-add/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "calendar-feature-calendar-view": {
+      "projectType": "library",
+      "root": "libs/calendar/feature/calendar-view",
+      "sourceRoot": "libs/calendar/feature/calendar-view/src",
+      "prefix": "fitness-app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/calendar/feature/calendar-view/tsconfig.lib.json",
+              "libs/calendar/feature/calendar-view/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/calendar/feature/calendar-view/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/calendar/feature/calendar-view/jest.config.js",
+            "tsConfig": "libs/calendar/feature/calendar-view/tsconfig.spec.json",
+            "setupFile": "libs/calendar/feature/calendar-view/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "calendar-data-calendar-data": {
+      "projectType": "library",
+      "root": "libs/calendar/data/calendar-data",
+      "sourceRoot": "libs/calendar/data/calendar-data/src",
+      "prefix": "fitness-app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/calendar/data/calendar-data/tsconfig.lib.json",
+              "libs/calendar/data/calendar-data/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/calendar/data/calendar-data/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/calendar/data/calendar-data/jest.config.js",
+            "tsConfig": "libs/calendar/data/calendar-data/tsconfig.spec.json",
+            "setupFile": "libs/calendar/data/calendar-data/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ExerciseDataModule } from '@fitness-app/exercise/data';
 import { environment } from '../environments/environment';
+import { CalendarDataModule } from '@fitness-app/calendar/data/calendar-data';
 @NgModule({
   declarations: [AppComponent, WelcomeComponent],
   imports: [
@@ -31,7 +32,8 @@ import { environment } from '../environments/environment';
       maxAge: 10
     }),
     EffectsModule.forRoot([]),
-    ExerciseDataModule.forRoot({ backendUrl: environment.backendURL })    
+    ExerciseDataModule.forRoot({ backendUrl: environment.backendURL }),
+    CalendarDataModule.forRoot({ backendUrl: environment.backendURL })
   ],
   providers: [],
   bootstrap: [AppComponent]

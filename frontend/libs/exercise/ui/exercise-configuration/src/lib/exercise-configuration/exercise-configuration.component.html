@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="center center" *ngIf="exercise">
+<div fxLayout="column" fxLayoutAlign="center center">
   <div class="container" [formGroup]="formGroup" fxLayout="column">
     <mat-form-field color="accent">
       <input matInput placeholder="Name" formControlName="name" />
@@ -26,7 +26,7 @@
       Cancel
     </button>
     <button
-      mat-raised-button class="confirm-button" (click)="confirm()">
+      mat-raised-button [disabled]="!formGroup.valid" class="confirm-button" (click)="confirm()">
       Confirm
     </button>
   </div>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using fitnessApi.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace fitnessApi.Models
@@ -13,6 +10,7 @@ namespace fitnessApi.Models
         {
         }
 
-        public DbSet<fitnessApi.Models.Exercise> Exercise { get; set; }
+        public DbSet<Exercise> Exercise { get; set; }
+        public DbSet<TrainingDay> TrainingDay { get; set; }
     }
 }

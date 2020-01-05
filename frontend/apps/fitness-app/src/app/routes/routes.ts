@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { WelcomeComponent } from '../welcome/welcome.component';
 
 export const ROUTES: Routes = [
   {
@@ -12,6 +11,8 @@ export const ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: WelcomeComponent
-  }
+    loadChildren: () =>
+    import('@fitness-app/calendar/feature/calendar-view').then(
+      m => m.CalendarViewModule
+    )  }
 ];

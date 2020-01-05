@@ -46,7 +46,7 @@ export class ExerciseListComponent implements OnInit {
   }
 
   addExercise() {
-    this.router.navigate(['/add'], { relativeTo: this.route });
+    this.router.navigate(['add'], { relativeTo: this.route });
   }
 
   editClicked(exercise: Exercise) {

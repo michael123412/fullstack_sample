@@ -9,7 +9,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { Exercise, ExerciseType } from '@fitness-app/exercise/data';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'fitness-app-exercise-configuration',
@@ -31,9 +31,9 @@ export class ExerciseConfigurationComponent implements OnInit, OnChanges {
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
       id: [null],
-      name: [''],
+      name: ['', [Validators.required]],
       description: [''],
-      type: ['']
+      type: ['', [Validators.required]]
     });
   }
 
@@ -54,7 +54,6 @@ export class ExerciseConfigurationComponent implements OnInit, OnChanges {
   }
 
   confirm() {
-    console.log(this.formGroup.getRawValue());
     this.confirmClicked.emit(this.formGroup.getRawValue());
   }
 

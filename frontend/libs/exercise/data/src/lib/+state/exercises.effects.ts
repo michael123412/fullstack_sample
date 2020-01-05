@@ -82,7 +82,6 @@ export class ExercisesEffects {
         return this.exerciseDataService.update(action.payload.id as string, action.payload.changes as Exercise).pipe(
           map(
             (exercise: Exercise) => {
-              console.log(exercise);
               return new ExerciseUpdated({ id: action.payload.id as string, changes: action.payload.changes as Exercise}) 
             }
           ));

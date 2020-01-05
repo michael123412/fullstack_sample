@@ -13,5 +13,12 @@ export const EXERCISE_ROUTES: Routes = [
       import('@fitness-app/exercise/feature/feature-exercise-edit').then(
         m => m.ExerciseEditModule
       )
+  },
+  {
+    path: 'add',
+    loadChildren: () =>
+      import('@fitness-app/exercise/feature/feature-exercise-add').then(
+        m => m.FeatureExerciseAddModule
+      )
   }
 ];

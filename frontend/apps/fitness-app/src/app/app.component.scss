@@ -15,13 +15,14 @@
 }
 
 .main {
-  background-color: rgb(135, 167, 214);
+  background-color: #5883c1;//rgb(135, 167, 214);
 }
 
 .header {
   background-color: rgb(62, 45, 175);
   height: 50px;
   min-height: 50px;
+  max-height: 50px;
 }
 
 .user-field {

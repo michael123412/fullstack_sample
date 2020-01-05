@@ -34,6 +34,15 @@
     },
     "exercise-ui-exercise-configuration": {
       "tags": []
+    },
+    "feature-exercise-add": {
+      "tags": []
+    },
+    "calendar-feature-calendar-view": {
+      "tags": []
+    },
+    "calendar-data-calendar-data": {
+      "tags": []
     }
   }
 }

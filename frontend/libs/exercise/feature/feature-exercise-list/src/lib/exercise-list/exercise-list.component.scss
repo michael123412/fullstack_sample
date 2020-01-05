@@ -9,6 +9,7 @@
 
 .footer {
     margin-top: 10px;
+    width: 100%;
     .add-button {
         background: #1e8945;        
     }
@@ -23,6 +24,7 @@
 
 mat-table {
     width: 100%;
+    height: 90%;
     background: #3e2daf;
-
+    // overflow-y: scroll;
 }

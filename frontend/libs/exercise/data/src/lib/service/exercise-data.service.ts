@@ -20,7 +20,6 @@ export class ExerciseDataService {
   ) { }
 
   getAll(): Observable<Array<Exercise>> {
-    console.log(this.config.backendUrl);
     return this.http
       .get<Array<Exercise>>(this.config.backendUrl + '/Exercises')
       .pipe(

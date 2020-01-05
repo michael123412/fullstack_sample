@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using fitnessApi.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
+using fitnessApi.Dto;
 
 namespace fitnessApi.Controllers
 {
@@ -81,10 +82,20 @@ namespace fitnessApi.Controllers
             return NoContent();
         }
 
+
+
         // POST: api/Exercises
         [HttpPost]
-        public async Task<IActionResult> PostExercise([FromBody] Exercise exercise)
+        public async Task<IActionResult> PostExercise([FromBody] ExerciseDto exerciseDto)
         {
+            var exercise = new Exercise
+            {
+                Id = Guid.NewGuid(),
+                Description = exerciseDto.Description,
+                Name = exerciseDto.Name,
+                Type = exerciseDto.Type
+            };
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
