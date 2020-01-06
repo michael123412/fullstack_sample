@@ -108,8 +108,6 @@ export class CalendarViewComponent implements AfterViewInit {
     if (oldTrainingDay) {
       exists = true;
     } else {
-      console.log(date);
-      console.log(date.toUTCString());
       oldTrainingDay = {
           id: '',
           date: date.toISOString(),

@@ -47,20 +47,44 @@ namespace fitnessApi.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrainingDay([FromRoute] Guid id, [FromBody] TrainingDay trainingDay)
+        public async Task<IActionResult> PutTrainingDay([FromRoute] Guid id, [FromBody] TrainingDayDto trainingDayDto)
         {
+            var addedTrainings = trainingDayDto.trainings.Where(training => String.IsNullOrEmpty(training.Id)).ToList();
+            var updatedTrainings = trainingDayDto.trainings.Where(training => !String.IsNullOrEmpty(training.Id)).ToList();
+
+            var trainingDay = new TrainingDay
+            {
+                Id = id,
+                date = trainingDayDto.date,
+                Trainings = trainingDayDto.trainings.Select(trainingDto => new Training
+                {
+                    Id = String.IsNullOrEmpty(trainingDto.Id) ? Guid.NewGuid() : Guid.Parse(trainingDto.Id),
+                    Done = trainingDto.Done,
+                    Exercise = trainingDto.Exercise,
+                    ExerciseId = String.IsNullOrEmpty(trainingDto.ExerciseId) ? Guid.NewGuid() : Guid.Parse(trainingDto.ExerciseId),
+                    Note = trainingDto.Note,
+                    Order = trainingDto.Order,
+                    Repetitions = trainingDto.Repetitions
+                }).ToList()
+            };
+
+
             if (id != trainingDay.Id)
             {
                 return BadRequest();
             }
 
             _context.Entry(trainingDay).State = EntityState.Modified;
+            foreach (var training in updatedTrainings)
+            {
+                _context.Entry(training).State = EntityState.Modified;
+            }
 
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
                 if (!TrainingDayExists(id))
                 {
