@@ -17,8 +17,9 @@ import {
   TrainingDay,
   Training
 } from '@fitness-app/calendar/data/calendar-data';
-import { Observable } from 'rxjs';
 import { Exercise, ExercisesFacade } from '@fitness-app/exercise/data';
+import { MatDialog } from '@angular/material/dialog';
+import { TrainingDayConfigurationDialogComponent } from '@fitness-app/calendar/ui/training-day-configuration';
 
 @Component({
   selector: 'fitness-app-calendar-view',
@@ -40,7 +41,8 @@ export class CalendarViewComponent implements AfterViewInit {
 
   constructor(
     private trainingDaysFacade: TrainingDaysFacade,
-    private exercisesFacade: ExercisesFacade
+    private exercisesFacade: ExercisesFacade,
+    private dialog: MatDialog
   ) {
     this.trainingDaysFacade.allTrainingDays$.subscribe(
       (trainingDays: TrainingDay[]) => {
@@ -77,13 +79,9 @@ export class CalendarViewComponent implements AfterViewInit {
 
   updateTrainingEvents() {
     const events: EventInput[] = [];
-
     this.trainingDays.forEach((trainingDay: TrainingDay) => {
       trainingDay.trainings.forEach((training: Training) => {
         const exercise = this.exercises.find((exercise: Exercise) => exercise.id === training.exerciseId);
-         
-        console.log(this.exercises);
-        console.log(training.exerciseId);
         events.push({
           title: `${training.repetitions}x ${exercise.name}`,
           start: trainingDay.date,
@@ -104,7 +102,49 @@ export class CalendarViewComponent implements AfterViewInit {
     // calendarApi.render();
   }
 
+  openTrainingDayDialog(date: Date) {
+    let oldTrainingDay: TrainingDay = this.trainingDays.find((trainingDay: TrainingDay) => this.isSameDay(date, new Date(trainingDay.date)))
+    let exists: boolean;
+    if (oldTrainingDay) {
+      exists = true;
+    } else {
+      console.log(date);
+      console.log(date.toUTCString());
+      oldTrainingDay = {
+          id: '',
+          date: date.toISOString(),
+          trainings: []
+      };
+      exists = false;
+    }
+
+
+    const dialogRef = this.dialog.open(TrainingDayConfigurationDialogComponent, {
+      minWidth: 400,
+      data: oldTrainingDay
+    });
+
+    dialogRef.afterClosed().subscribe((result: { confirmed: boolean, trainingDay: TrainingDay}) => {
+      if (!result || !result.confirmed) {
+        return;
+      }
+
+      if (exists) {
+        this.trainingDaysFacade.update(result.trainingDay);
+      } else {
+        this.trainingDaysFacade.create(result.trainingDay);
+      }
+    });
+  }
+
+  private isSameDay(d1: Date, d2: Date) {
+    return d1.getFullYear() === d2.getFullYear() &&
+      d1.getMonth() === d2.getMonth() &&
+      d1.getDate() === d2.getDate();
+  }
+
   handleDateClick(arg) {
+    this.openTrainingDayDialog(arg.date);
     // open training day
     // if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
     //   this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
@@ -113,5 +153,9 @@ export class CalendarViewComponent implements AfterViewInit {
     //     allDay: arg.allDay
     //   })
     // }
+  }
+
+  handleEventClick(arg) { 
+    this.openTrainingDayDialog(arg.event.start)
   }
 }

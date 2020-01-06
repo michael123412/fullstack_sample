@@ -15,7 +15,7 @@ export function selectId(a: TrainingDay): string {
   return a.id;
 }
 export function sortByName(a: TrainingDay, b: TrainingDay): number {
-  return a.date.toISOString().localeCompare(b.date.toISOString());
+  return a.date.localeCompare(b.date);
 }
 export const adapter: EntityAdapter<TrainingDay> = createEntityAdapter<TrainingDay>({
   selectId: selectId,

@@ -4,6 +4,7 @@ import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 import { RouterModule } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarDataModule } from '@fitness-app/calendar/data/calendar-data'
+import { TrainingDayConfigurationModule } from '@fitness-app/calendar/ui/training-day-configuration';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +16,8 @@ import { CalendarDataModule } from '@fitness-app/calendar/data/calendar-data'
       }
     ]),
     FullCalendarModule,
-    CalendarDataModule
+    CalendarDataModule,
+    TrainingDayConfigurationModule
   ],
   declarations: [CalendarViewComponent]
 })

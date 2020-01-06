@@ -2,6 +2,6 @@ import { Training } from './training';
 
 export interface TrainingDay {
     id: string;
-    date: Date;
+    date: string;
     trainings: Training[];
 }

@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatSidenav } from '@angular/material/sidenav';
 import { environment } from '../environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface Message {
   message: string;
@@ -12,12 +13,18 @@ export interface Message {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   hello$ = this.http.get<Message>(environment.backendURL + '/HelloWorld');
-  constructor(private http: HttpClient) {
-  }
+  constructor(
+    private http: HttpClient,
+    private translateService: TranslateService
+  ) {}
 
-  @ViewChild('sidenav', {static: false}) Sidenav: MatSidenav;
+  @ViewChild('sidenav', { static: false }) Sidenav: MatSidenav;
+
+  ngOnInit(): void {
+    this.translateService.use('deAT');
+  }
 
   close() {
     this.Sidenav.close();

@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{ trainingDay.date | date:'longDate' }}</h1>
+<div mat-dialog-content>
+  <fitness-app-training-day-configuration
+    [trainingDay]="trainingDay"
+    [exercises]="exercises$ | async"
+    (trainingDayUpated)="handleTrainingDayUpdated($event)"
+  ></fitness-app-training-day-configuration>
+</div>
+<div mat-dialog-actions>
+    <button mat-stroked-button (click)="close(false)">
+      Cancel
+    </button>
+    <button mat-raised-button class="delete-button" (click)="close(true)">
+      Confirm
+    </button>
+  </div>

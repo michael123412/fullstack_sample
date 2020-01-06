@@ -81,11 +81,26 @@ namespace fitnessApi.Controllers
         [HttpPost]
         public async Task<ActionResult<TrainingDay>> PostTrainingDay([FromBody] TrainingDayDto trainingDayDto)
         {
+            //foreach (var training in trainingDayDto.trainings)
+            //{
+            //    if (training.Id == Guid.Empty)
+            //        training.Id = Guid.NewGuid();
+            //}
+
             var trainingDay = new TrainingDay
             {
                 Id = Guid.NewGuid(),
                 date = trainingDayDto.date,
-                Trainings = trainingDayDto.trainings
+                Trainings = trainingDayDto.trainings.Select(trainingDto => new Training
+                {
+                    Id = String.IsNullOrEmpty(trainingDto.Id) ? Guid.NewGuid() : Guid.Parse(trainingDto.Id),
+                    Done = trainingDto.Done,
+                    Exercise = trainingDto.Exercise,
+                    ExerciseId = String.IsNullOrEmpty(trainingDto.ExerciseId) ? Guid.NewGuid() : Guid.Parse(trainingDto.ExerciseId),
+                    Note = trainingDto.Note,
+                    Order = trainingDto.Order,
+                    Repetitions = trainingDto.Repetitions
+                }).ToList()
             };
 
             _context.TrainingDay.Add(trainingDay);

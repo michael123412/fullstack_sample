@@ -480,6 +480,40 @@
           "styleext": "scss"
         }
       }
+    },
+    "calendar-ui-training-day-configuration": {
+      "projectType": "library",
+      "root": "libs/calendar/ui/training-day-configuration",
+      "sourceRoot": "libs/calendar/ui/training-day-configuration/src",
+      "prefix": "fitness-app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/calendar/ui/training-day-configuration/tsconfig.lib.json",
+              "libs/calendar/ui/training-day-configuration/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/calendar/ui/training-day-configuration/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/calendar/ui/training-day-configuration/jest.config.js",
+            "tsConfig": "libs/calendar/ui/training-day-configuration/tsconfig.spec.json",
+            "setupFile": "libs/calendar/ui/training-day-configuration/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

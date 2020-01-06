@@ -2,14 +2,15 @@
   <full-calendar
     #calendar
     defaultView="dayGridMonth"
+    timeZone="UTC"
     [header]="{
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,dayGridWeek,dayGridDay,listWeek'
     }"
     [plugins]="calendarPlugins"
-    [weekends]="calendarWeekends"
     [events]="calendarEvents"
     (dateClick)="handleDateClick($event)"
+    (eventClick)="handleEventClick($event)"
   ></full-calendar>
 </div>
