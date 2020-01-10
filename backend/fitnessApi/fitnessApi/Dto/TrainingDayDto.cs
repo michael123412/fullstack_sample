@@ -9,7 +9,7 @@ namespace fitnessApi.Dto
     public class TrainingDayDto
     {
         public DateTime date { get; set; }
-        public List<TrainingDto> trainings { get; set; }
+        public virtual List<TrainingDto> trainings { get; set; }
     }
 
     public class TrainingDto

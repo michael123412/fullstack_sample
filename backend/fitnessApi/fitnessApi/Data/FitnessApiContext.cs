@@ -12,5 +12,8 @@ namespace fitnessApi.Models
 
         public DbSet<Exercise> Exercise { get; set; }
         public DbSet<TrainingDay> TrainingDay { get; set; }
+        public DbSet<Training> Training { get; set; }
+
     }
+
 }

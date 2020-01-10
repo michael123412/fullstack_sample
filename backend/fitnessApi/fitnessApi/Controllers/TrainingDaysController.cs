@@ -49,39 +49,67 @@ namespace fitnessApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTrainingDay([FromRoute] Guid id, [FromBody] TrainingDayDto trainingDayDto)
         {
-            var addedTrainings = trainingDayDto.trainings.Where(training => String.IsNullOrEmpty(training.Id)).ToList();
-            var updatedTrainings = trainingDayDto.trainings.Where(training => !String.IsNullOrEmpty(training.Id)).ToList();
-
-            var trainingDay = new TrainingDay
-            {
-                Id = id,
-                date = trainingDayDto.date,
-                Trainings = trainingDayDto.trainings.Select(trainingDto => new Training
-                {
-                    Id = String.IsNullOrEmpty(trainingDto.Id) ? Guid.NewGuid() : Guid.Parse(trainingDto.Id),
-                    Done = trainingDto.Done,
-                    Exercise = trainingDto.Exercise,
-                    ExerciseId = String.IsNullOrEmpty(trainingDto.ExerciseId) ? Guid.NewGuid() : Guid.Parse(trainingDto.ExerciseId),
-                    Note = trainingDto.Note,
-                    Order = trainingDto.Order,
-                    Repetitions = trainingDto.Repetitions
-                }).ToList()
-            };
-
-
-            if (id != trainingDay.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(trainingDay).State = EntityState.Modified;
-            foreach (var training in updatedTrainings)
-            {
-                _context.Entry(training).State = EntityState.Modified;
-            }
-
             try
             {
+                var trainingDayFromDB = await _context.TrainingDay.Include("Trainings").FirstOrDefaultAsync(entity => entity.Id == id);
+
+                var trainingDay = new TrainingDay
+                {
+                    Id = id,
+                    date = trainingDayDto.date,
+                    Trainings = trainingDayDto.trainings.Select(trainingDto => new Training
+                    {
+                        Id = String.IsNullOrEmpty(trainingDto.Id) ? Guid.Empty : Guid.Parse(trainingDto.Id),
+                        Done = trainingDto.Done,
+                        Exercise = trainingDto.Exercise,
+                        ExerciseId = String.IsNullOrEmpty(trainingDto.ExerciseId) ? Guid.NewGuid() : Guid.Parse(trainingDto.ExerciseId),
+                        Note = trainingDto.Note,
+                        Order = trainingDto.Order,
+                        Repetitions = trainingDto.Repetitions
+                    }).ToList()
+                };
+
+                var addedTrainings = trainingDayDto.trainings.Where(training => String.IsNullOrEmpty(training.Id)).ToList();
+                var updatedTrainings = trainingDayDto.trainings.Where(training => !String.IsNullOrEmpty(training.Id)).ToList();
+                var deletedTrainings = trainingDayFromDB.Trainings.Where(training => trainingDay.Trainings.All(tr => tr.Id != training.Id));
+
+                if (id != trainingDay.Id)
+                {
+                    return BadRequest();
+                }
+
+                //trainingDayFromDB.Trainings = trainingDay.Trainings;
+
+                //_context.Entry(trainingDay).State = EntityState.Modified;
+                foreach (var training in trainingDay.Trainings)
+                {
+                    if (training.Id == Guid.Empty)
+                    {
+                        training.Id = Guid.NewGuid();
+                        trainingDayFromDB.Trainings.Add(training);
+                        _context.Entry(training).State = EntityState.Added;
+
+                        //_context.Training.Add(training);
+                    }
+                    else
+                    {
+                        var toEdit = trainingDayFromDB.Trainings.First(tra => tra.Id == training.Id);
+                        toEdit.Repetitions = training.Repetitions;
+                        toEdit.Note = training.Note;
+                        toEdit.Order = training.Order;
+                        toEdit.ExerciseId = training.ExerciseId;
+                        
+                        _context.Entry(toEdit).State = EntityState.Modified;
+
+                    }
+                }
+                foreach (var training in deletedTrainings)
+                {
+                    _context.Training.Remove(training);
+
+                }
+
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException ex)
@@ -94,6 +122,10 @@ namespace fitnessApi.Controllers
                 {
                     throw;
                 }
+            }
+            catch (Exception ex1)
+            {
+
             }
 
             return NoContent();
