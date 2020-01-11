@@ -10,6 +10,7 @@
     }"
     [plugins]="calendarPlugins"
     [events]="calendarEvents"
+    eventOrder="-order"
     (dateClick)="handleDateClick($event)"
     (eventClick)="handleEventClick($event)"
   ></full-calendar>

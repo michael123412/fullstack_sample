@@ -14,6 +14,7 @@ import {
 } from '@fitness-app/calendar/data/calendar-data';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Exercise } from '@fitness-app/exercise/data';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'fitness-app-training-day-configuration',
@@ -41,7 +42,6 @@ export class TrainingDayConfigurationComponent implements OnInit {
       this.updateFormGroup(this.trainingDay);
     }
     this.formGroup.valueChanges.subscribe((trainingDay: TrainingDay) => {
-      console.log(trainingDay);
       this.trainingDayUpated.emit(trainingDay)
     });
   }
@@ -61,6 +61,15 @@ export class TrainingDayConfigurationComponent implements OnInit {
   deleteClicked(index: number) {
     const array = this.formGroup.get('trainings') as FormArray;
     array.removeAt(index);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+      let order = 0;
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      (event.container.data as unknown as FormGroup[]).forEach((group: FormGroup) => {
+        group.get('order').setValue(order);
+        order++;
+      });
   }
 
   private createTrainingFormGroup(): FormGroup {

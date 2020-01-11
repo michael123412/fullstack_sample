@@ -80,7 +80,7 @@ export class CalendarViewComponent implements AfterViewInit {
   updateTrainingEvents() {
     const events: EventInput[] = [];
     this.trainingDays.forEach((trainingDay: TrainingDay) => {
-      trainingDay.trainings.forEach((training: Training) => {
+      trainingDay.trainings.sort((n1,n2) => n1.order - n2.order).forEach((training: Training) => {
         const exercise = this.exercises.find((exercise: Exercise) => exercise.id === training.exerciseId);
         events.push({
           title: `${training.repetitions}x ${exercise.name}`,

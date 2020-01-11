@@ -1,8 +1,14 @@
 .app-calendar {
-    margin: 20px auto;
-    max-width: 800px;
-  }
+  margin: 20px auto;
+  max-width: 1100px;
+}
 
-  .fc-today {
-    background: #798dff88 !important;
-  }
+.fc-today {
+  background: #798dff88 !important;
+}
+
+.fc-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

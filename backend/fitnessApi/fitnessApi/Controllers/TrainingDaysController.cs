@@ -97,6 +97,7 @@ namespace fitnessApi.Controllers
                         toEdit.Repetitions = training.Repetitions;
                         toEdit.Note = training.Note;
                         toEdit.Order = training.Order;
+                        toEdit.Done = training.Done;
                         toEdit.ExerciseId = training.ExerciseId;
                         
                         _context.Entry(toEdit).State = EntityState.Modified;
