@@ -7,8 +7,13 @@
 }
 
 .training-container{
-    margin: 7px;
+    margin: 4px;
     padding: 10px 10px 0 10px;
+    width: 100%;
+    @media only screen and(max-width: 599px){
+        margin: 2px;    
+        padding: 5px 5px 0 5px;
+    }
 }
 .done {
     background-color: #3bed3355;
@@ -22,6 +27,7 @@
 .add-button {
     background-color: #1e8945;
     margin-left: 10px;
+    width: 200px;
 }
 
 .trainings-group {
@@ -29,6 +35,11 @@
     border: 1px solid white;
     margin: 2px;
     border-radius: 10px;
+    width: 100%;
+    @media only screen and(max-width: 599px){
+        font-size: 0.9rem;
+    }
+
 }
 
 .title {
@@ -58,4 +69,11 @@
   
   .cdk-drag-animating {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .hide {
+      visibility: collapse;
+      height: 0;
+      padding: 0;
+      margin: 0;
   }

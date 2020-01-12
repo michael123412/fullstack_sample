@@ -69,8 +69,6 @@ namespace fitnessApi.Controllers
                     }).ToList()
                 };
 
-                var addedTrainings = trainingDayDto.trainings.Where(training => String.IsNullOrEmpty(training.Id)).ToList();
-                var updatedTrainings = trainingDayDto.trainings.Where(training => !String.IsNullOrEmpty(training.Id)).ToList();
                 var deletedTrainings = trainingDayFromDB.Trainings.Where(training => trainingDay.Trainings.All(tr => tr.Id != training.Id));
 
                 if (id != trainingDay.Id)
@@ -78,9 +76,6 @@ namespace fitnessApi.Controllers
                     return BadRequest();
                 }
 
-                //trainingDayFromDB.Trainings = trainingDay.Trainings;
-
-                //_context.Entry(trainingDay).State = EntityState.Modified;
                 foreach (var training in trainingDay.Trainings)
                 {
                     if (training.Id == Guid.Empty)
@@ -88,8 +83,6 @@ namespace fitnessApi.Controllers
                         training.Id = Guid.NewGuid();
                         trainingDayFromDB.Trainings.Add(training);
                         _context.Entry(training).State = EntityState.Added;
-
-                        //_context.Training.Add(training);
                     }
                     else
                     {
@@ -101,15 +94,12 @@ namespace fitnessApi.Controllers
                         toEdit.ExerciseId = training.ExerciseId;
                         
                         _context.Entry(toEdit).State = EntityState.Modified;
-
                     }
                 }
                 foreach (var training in deletedTrainings)
                 {
                     _context.Training.Remove(training);
-
                 }
-
 
                 await _context.SaveChangesAsync();
             }

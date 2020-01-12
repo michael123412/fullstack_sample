@@ -1,21 +1,20 @@
 <div fxLayout="column" fxLayoutAlign="center center">
   <div class="container trainings-group" [formGroup]="formGroup" fxLayout="column">
-    <div class="padding-top" formArrayName="trainings" 
+    <div fxFlex class="padding-top" formArrayName="trainings" 
     cdkDropList
     [cdkDropListData]="formGroup.get('trainings').controls"
     (cdkDropListDropped)="drop($event)">
         <mat-label class="gap-right title">Trainings</mat-label>
-        <div class="no-exercises-container">
-            <mat-label *ngIf="formGroup.get('trainings').controls.length === 0" class="title">No Trainings added yet</mat-label>
+        <div *ngIf="formGroup.get('trainings').controls.length === 0" class="no-exercises-container">
+            <mat-label  class="title">No Trainings added yet</mat-label>
         </div>
         <div *ngFor="let training of formGroup.get('trainings').controls; let i = index" 
         cdkDrag
-        cdkDragLockAxis="y">
-        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        <div [formGroupName]="i" class="training-container" [class.done]="formGroup.get('trainings').controls[i].value.done"
-         >
-          <mat-label class="gap-right">{{ training.order }}</mat-label>
-          <mat-form-field class="gap-right">
+        cdkDragLockAxis="y"
+        [class.hide]="hideDone && training.value.done">
+        <div  class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" fxLayoutGap.xs="3px" [class.hide]="hideDone && training.value.done" [formGroupName]="i" class="training-container" [class.done]="formGroup.get('trainings').controls[i].value.done">
+          <mat-form-field fxFlex="30" fxFlex.xs="35">
             <mat-label>Exercise</mat-label>
             <mat-select
               formControlName="exerciseId"
@@ -28,7 +27,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field class="gap-right" color="accent">
+          <mat-form-field fxFlex="15" fxFlex.xs="20" color="accent">
             <input
               matInput
               type="number"
@@ -38,16 +37,16 @@
               placeholder="Repetitions"
             />
           </mat-form-field>
-          <mat-form-field class="gap-right">
+          <mat-form-field fxFlex fxHide fxShow.gt-xs>
             <input matInput formControlName="note" placeholder="Note" />
           </mat-form-field>
-          <mat-checkbox formControlName="done">Done</mat-checkbox>
-          <button mat-icon-button (click)="deleteClicked(i)">
+          <mat-checkbox fxFlex="none" formControlName="done">Done</mat-checkbox>
+          <button fxFlex="none" mat-icon-button (click)="deleteClicked(i)">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
       </div>
     </div>
-    <button class="add-button" mat-raised-button (click)="handleAddExerciseClicked()">Add Training</button>
+    <button fxFlex="none" class="add-button" mat-raised-button (click)="handleAddExerciseClicked()">Add Training</button>
   </div>
 </div>

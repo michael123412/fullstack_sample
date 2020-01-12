@@ -11,6 +11,8 @@
     [plugins]="calendarPlugins"
     [events]="calendarEvents"
     eventOrder="-order"
+    eventLimit="6"
+    [firstDay]="1"
     (dateClick)="handleDateClick($event)"
     (eventClick)="handleEventClick($event)"
   ></full-calendar>

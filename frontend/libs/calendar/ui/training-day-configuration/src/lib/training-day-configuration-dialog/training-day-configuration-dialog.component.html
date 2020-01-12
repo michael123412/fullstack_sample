@@ -1,16 +1,22 @@
-<h1 mat-dialog-title>{{ trainingDay.date | date:'longDate' }}</h1>
+<div fxLayout="row">
+  <h1 fxFlex fxHide fxShow.gt-xs mat-dialog-title>{{ trainingDay.date | date: 'longDate' }}</h1>
+  <h1 fxFlex fxHide fxShow.xs mat-dialog-title>{{ trainingDay.date | date: 'shortDate' }}</h1>
+  <div fxFlex></div>
+  <mat-checkbox fxFlex="none"  #checkbox>Hide "Done"</mat-checkbox>
+</div>
 <div mat-dialog-content>
   <fitness-app-training-day-configuration
     [trainingDay]="trainingDay"
+    [hideDone]="checkbox.checked"
     [exercises]="exercises$ | async"
     (trainingDayUpated)="handleTrainingDayUpdated($event)"
   ></fitness-app-training-day-configuration>
 </div>
 <div mat-dialog-actions>
-    <button mat-stroked-button (click)="close(false)">
-      Cancel
-    </button>
-    <button mat-raised-button class="delete-button" (click)="close(true)">
-      Confirm
-    </button>
-  </div>
+  <button mat-stroked-button (click)="close(false)">
+    Cancel
+  </button>
+  <button mat-raised-button class="delete-button" (click)="close(true)">
+    Confirm
+  </button>
+</div>

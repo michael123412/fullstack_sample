@@ -26,6 +26,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class TrainingDayConfigurationComponent implements OnInit {
   @Input() trainingDay: TrainingDay;
   @Input() exercises: Exercise[];
+  @Input() hideDone: boolean;
   @Output() trainingDayUpated: EventEmitter<TrainingDay> = new EventEmitter<TrainingDay>();
 
   formGroup: FormGroup;
@@ -47,6 +48,7 @@ export class TrainingDayConfigurationComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
     if (changes.exercise && changes.exercise.currentValue) {
       this.updateFormGroup(changes.exercise.currentValue);
     }
@@ -55,6 +57,7 @@ export class TrainingDayConfigurationComponent implements OnInit {
   handleAddExerciseClicked(): void {1
     const array = this.formGroup.get('trainings') as FormArray;
     const form = this.createTrainingFormGroup();
+    form.get('order').setValue(array.length);
     array.push(form);
   }
 

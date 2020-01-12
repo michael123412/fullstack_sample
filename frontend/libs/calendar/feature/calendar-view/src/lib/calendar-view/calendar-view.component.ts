@@ -118,7 +118,7 @@ export class CalendarViewComponent implements AfterViewInit {
 
 
     const dialogRef = this.dialog.open(TrainingDayConfigurationDialogComponent, {
-      minWidth: 400,
+      minWidth: 300,
       data: oldTrainingDay
     });
 

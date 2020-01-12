@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatSelectModule,
     MatCheckboxModule,
     MatIconModule,
-    DragDropModule
+    DragDropModule,
+    FlexLayoutModule
   ],
   exports: [
     TrainingDayConfigurationComponent,
