@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/frontend/dist
+# temp disable for github pages test /frontend/dist
 /tmp
 /out-tsc
 
