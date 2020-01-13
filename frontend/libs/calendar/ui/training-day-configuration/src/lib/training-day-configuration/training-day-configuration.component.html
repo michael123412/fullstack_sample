@@ -2,13 +2,13 @@
   <div class="container trainings-group" [formGroup]="formGroup" fxLayout="column">
     <div fxFlex class="padding-top" formArrayName="trainings" 
     cdkDropList
-    [cdkDropListData]="formGroup.get('trainings').controls"
+    [cdkDropListData]="formGroup.get('trainings')['controls']"
     (cdkDropListDropped)="drop($event)">
         <mat-label class="gap-right title">Trainings</mat-label>
-        <div *ngIf="formGroup.get('trainings').controls.length === 0" class="no-exercises-container">
+        <div *ngIf="formGroup.get('trainings')['controls'].length === 0" class="no-exercises-container">
             <mat-label  class="title">No Trainings added yet</mat-label>
         </div>
-        <div *ngFor="let training of formGroup.get('trainings').controls; let i = index" 
+        <div *ngFor="let training of formGroup.get('trainings')['controls']; let i = index" 
         cdkDrag
         cdkDragLockAxis="y"
         [class.hide]="hideDone && training.value.done">
