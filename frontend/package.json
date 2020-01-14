@@ -1,6 +1,10 @@
 {
   "name": "fitness-app",
   "version": "0.0.0",
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.9.0"
+  },
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -108,9 +112,5 @@
     "eslint-config-prettier": "6.0.0",
     "@ngrx/schematics": "8.3.0",
     "@ngrx/store-devtools": "8.3.0"
-  },
-  "engines": {
-    "node": "10",
-    "npm": "6.9.0"
   }
 }
