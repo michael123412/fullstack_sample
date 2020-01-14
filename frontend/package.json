@@ -1,6 +1,6 @@
 {
   "name": "fitness-app",
-  "version": "0.0.0",
+  "version": "0.5.0",
   "engines": {
     "node": "10.16.0",
     "npm": "6.9.0"
@@ -11,8 +11,7 @@
     "nx": "nx",
     "start": "node server.js",
     "postinstall": "ng build --aot --prod",
-    "build": "ng build",
-    "build-prod-frontend": "ng build fitness-app --prod ",
+    "build-app": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
