@@ -37,6 +37,7 @@ namespace fitnessApi
                 builder =>
                 {
                     builder.WithOrigins("http://localhost:4200",
+                                        "http://fitness1705.herokuapp.com",
                                         "https://fitness1705.herokuapp.com")
                     .WithMethods("GET", "POST", "DELETE", "PUT")
                     .WithHeaders("*");
