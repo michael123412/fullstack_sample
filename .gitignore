@@ -57,3 +57,4 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 backend/fitnessApi/fitnessApi/Properties/PublishProfiles/registry.heroku.com.pubxml
+frontend/package-lock.json

@@ -5,9 +5,9 @@
     >
   </div>
 </ng-container>
-<div fxLayout="column" fxLayoutAlign="center center" *ngIf="loaded$ | async">
-  <h1 fxFlex="none">Exercises</h1>
-  <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="container">
+<div fxLayout="column" fxLayoutAlign="center center" *ngIf="loaded$ | async" class="full-height">
+  <h2 fxFlex="none" class="color-black">Exercises</h2>
+  <div fxFlex fxLayout="column" fxLayoutAlign="center stretch" class="container">
     <mat-table fxFlex [dataSource]="exercises$ | async">
       <ng-container matColumnDef="name">
         <mat-header-cell fxFlex="25" fxFlex.xs *matHeaderCellDef
@@ -76,7 +76,7 @@
         *matRowDef="let row; columns: displayedColumns"
       ></mat-row>
     </mat-table>
-    <div fxFlex fxLayout="row" class="footer">
+    <div fxFlex="none" fxLayout="row" class="footer">
       <button fxFlex="none" mat-raised-button class="add-button" (click)="addExercise()">
         Create new Exercise
       </button>

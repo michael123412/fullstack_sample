@@ -3,7 +3,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 $white: (
-    50 : #e8e6f5,
+    50 : #f7f7f7
+//#e8e6f5,
 );
 
 $mat-myapp-primary: (
@@ -113,3 +114,8 @@ mat-dialog-container {
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
+
+
+.color-black {
+    color: #333333;
+}
