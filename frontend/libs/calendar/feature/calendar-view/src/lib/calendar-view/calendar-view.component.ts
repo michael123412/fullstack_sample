@@ -29,7 +29,7 @@ import { TrainingDayConfigurationDialogComponent } from '@fitness-app/calendar/u
   encapsulation: ViewEncapsulation.None
 })
 export class CalendarViewComponent implements AfterViewInit {
-  @ViewChild('calendar', { static: true, read: false })
+  @ViewChild('calendar')
   calendarComponent: FullCalendarComponent; // the #calendar in the template
 
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
