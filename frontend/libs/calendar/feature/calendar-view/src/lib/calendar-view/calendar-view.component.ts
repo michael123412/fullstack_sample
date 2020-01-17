@@ -46,21 +46,19 @@ export class CalendarViewComponent implements AfterViewInit {
   ) {
     this.trainingDaysFacade.allTrainingDays$.subscribe(
       (trainingDays: TrainingDay[]) => {
-        this.trainingDays = trainingDays;        
+        this.trainingDays = trainingDays;
         if (this.exercises && this.exercises.length > 0) {
           this.updateTrainingEvents();
         }
       }
     );
 
-    this.exercisesFacade.allExercises$.subscribe(
-      (exercises: Exercise[]) => {
-        this.exercises = exercises;
-        if (this.trainingDays && this.trainingDays.length > 0) {
-          this.updateTrainingEvents();
-        }
+    this.exercisesFacade.allExercises$.subscribe((exercises: Exercise[]) => {
+      this.exercises = exercises;
+      if (this.trainingDays && this.trainingDays.length > 0) {
+        this.updateTrainingEvents();
       }
-    );
+    });
 
     this.trainingDaysFacade.loadAll();
     this.exercisesFacade.loadAll();
@@ -68,34 +66,46 @@ export class CalendarViewComponent implements AfterViewInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.updateCalendarHeight(event.target.innerHeight);
+    this.updateCalendarHeight(
+      event.target.innerHeight,
+      event.target.innerWidth
+    );
   }
 
   ngAfterViewInit(): void {
     this.calendarApi = this.calendarComponent.getApi();
     this.calendarApi.setOption('displayEventTime', false);
-    this.updateCalendarHeight(window.innerHeight);
+    this.updateCalendarHeight(window.innerHeight, window.innerWidth);
   }
 
   updateTrainingEvents() {
     const events: EventInput[] = [];
     this.trainingDays.forEach((trainingDay: TrainingDay) => {
-      trainingDay.trainings.sort((n1,n2) => n1.order - n2.order).forEach((training: Training) => {
-        const exercise = this.exercises.find((exercise: Exercise) => exercise.id === training.exerciseId);
-        events.push({
-          title: `${training.repetitions}x ${exercise.name}`,
-          start: trainingDay.date,
-          backgroundColor: training.done ? '#1a820d' : '#3e2daf',
-          borderColor: '#ffffff99',
-          displayEventTime: false
+      trainingDay.trainings
+        .sort((n1, n2) => n1.order - n2.order)
+        .forEach((training: Training) => {
+          const exercise = this.exercises.find(
+            (exercise: Exercise) => exercise.id === training.exerciseId
+          );
+          events.push({
+            title: `${training.repetitions}x ${exercise.name}`,
+            start: trainingDay.date,
+            backgroundColor: training.done ? '#1a820d' : '#3e2daf',
+            borderColor: '#ffffff99',
+            displayEventTime: false
+          });
         });
-      });
     });
     this.calendarEvents = events;
   }
 
-  updateCalendarHeight(height: number) {
-    this.calendarApi.setOption('height', height - 150);
+  updateCalendarHeight(height: number, width: number) {
+    //small devices
+    if (width < 599) {
+      this.calendarApi.setOption('height', height - 55);
+    } else {
+      this.calendarApi.setOption('height', height - 150);
+    }
     this.calendarApi.updateSize();
     // calendarApi.setOption('contentHeight', 700);
     // this.calendarApi.setOption('aspectRatio', 1.8);
@@ -103,42 +113,51 @@ export class CalendarViewComponent implements AfterViewInit {
   }
 
   openTrainingDayDialog(date: Date) {
-    let oldTrainingDay: TrainingDay = this.trainingDays.find((trainingDay: TrainingDay) => this.isSameDay(date, new Date(trainingDay.date)))
+    let oldTrainingDay: TrainingDay = this.trainingDays.find(
+      (trainingDay: TrainingDay) =>
+        this.isSameDay(date, new Date(trainingDay.date))
+    );
     let exists: boolean;
     if (oldTrainingDay) {
       exists = true;
     } else {
       oldTrainingDay = {
-          id: '',
-          date: date.toISOString(),
-          trainings: []
+        id: '',
+        date: date.toISOString(),
+        trainings: []
       };
       exists = false;
     }
 
-
-    const dialogRef = this.dialog.open(TrainingDayConfigurationDialogComponent, {
-      minWidth: 300,
-      data: oldTrainingDay
-    });
-
-    dialogRef.afterClosed().subscribe((result: { confirmed: boolean, trainingDay: TrainingDay}) => {
-      if (!result || !result.confirmed) {
-        return;
+    const dialogRef = this.dialog.open(
+      TrainingDayConfigurationDialogComponent,
+      {
+        minWidth: 300,
+        data: oldTrainingDay
       }
+    );
 
-      if (exists) {
-        this.trainingDaysFacade.update(result.trainingDay);
-      } else {
-        this.trainingDaysFacade.create(result.trainingDay);
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .subscribe((result: { confirmed: boolean; trainingDay: TrainingDay }) => {
+        if (!result || !result.confirmed) {
+          return;
+        }
+
+        if (exists) {
+          this.trainingDaysFacade.update(result.trainingDay);
+        } else {
+          this.trainingDaysFacade.create(result.trainingDay);
+        }
+      });
   }
 
   private isSameDay(d1: Date, d2: Date) {
-    return d1.getFullYear() === d2.getFullYear() &&
+    return (
+      d1.getFullYear() === d2.getFullYear() &&
       d1.getMonth() === d2.getMonth() &&
-      d1.getDate() === d2.getDate();
+      d1.getDate() === d2.getDate()
+    );
   }
 
   handleDateClick(arg) {
@@ -153,7 +172,7 @@ export class CalendarViewComponent implements AfterViewInit {
     // }
   }
 
-  handleEventClick(arg) { 
-    this.openTrainingDayDialog(arg.event.start)
+  handleEventClick(arg) {
+    this.openTrainingDayDialog(arg.event.start);
   }
 }
