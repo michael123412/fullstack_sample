@@ -115,6 +115,11 @@ mat-dialog-container {
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
 
+.cdk-overlay-pane {
+    @media only screen and(max-width: 599px){
+        max-width: 90vw !important;
+    }
+}
 
 .color-black {
     color: #333333;

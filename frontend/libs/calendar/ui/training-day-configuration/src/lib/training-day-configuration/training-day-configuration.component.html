@@ -12,14 +12,11 @@
         [class.hide]="hideDone && training.value.done"
         cdkDrag cdkDragLockAxis="y">
         <div  class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" fxLayoutGap.xs="3px" [class.hide]="hideDone && training.value.done" [formGroupName]="i" class="training-container" [class.done]="formGroup.get('trainings').controls[i].value.done">
-          
-          <span cdkDragHandle>
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" fxLayoutGap.xs="3px" [class.hide]="hideDone && training.value.done" [formGroupName]="i" class="training-container" [class.done]="formGroup.get('trainings').controls[i].value.done">          
+          <span fxFlex="none" cdkDragHandle>
             <mat-icon >drag_indicator</mat-icon>
           </span>
-
-
-          <mat-form-field fxFlex="30" fxFlex.xs="35" color="accent">
+          <mat-form-field fxFlex="25" fxFlex.xs="35" color="accent">
             <mat-label>Exercise</mat-label>
             <mat-select
               formControlName="exerciseId"

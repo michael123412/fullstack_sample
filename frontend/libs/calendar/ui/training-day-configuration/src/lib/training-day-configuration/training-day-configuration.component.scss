@@ -7,8 +7,9 @@
 }
 
 .training-container{
-    margin: 4px;
-    padding: 10px 10px 0 10px;
+    margin: 2px 0 2px 0;
+    //padding: 10px 10px 0 10px;
+    padding-top: 5px;
     width: 100%;
     @media only screen and(max-width: 599px){
         margin: 2px;    
@@ -17,7 +18,7 @@
 }
 .done {
     background-color: #3bed3355;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 .padding-top {
@@ -28,6 +29,7 @@
     background-color: #1e8945;
     margin-left: 10px;
     width: 200px;
+    margin-top: 5px;
 }
 
 .trainings-group {
@@ -50,6 +52,7 @@
 .no-exercises-container {
     text-align: center;
     margin: 20px 0;
+    width: 400px;
 }
 
 .example-custom-placeholder {

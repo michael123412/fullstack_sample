@@ -111,21 +111,30 @@ namespace fitnessApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExercise([FromRoute] Guid id)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
-            }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
 
-            var exercise = await _context.Exercise.FindAsync(id);
-            if (exercise == null)
+                var exercise = await _context.Exercise.FindAsync(id);
+                if (exercise == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Exercise.Remove(exercise);
+                await _context.SaveChangesAsync();
+
+                return Ok(exercise);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+
+                throw;
             }
-
-            _context.Exercise.Remove(exercise);
-            await _context.SaveChangesAsync();
-
-            return Ok(exercise);
+            
         }
 
         private bool ExerciseExists(Guid id)
